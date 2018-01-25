@@ -12,7 +12,7 @@ resources:
     api: https://api.system.cumuluslabs.io        #<---- REPLACE ME
     username: {{cf-user}}
     password: {{cf-password}}
-    organization: rkumarr-PAL-JAN22    #<---- REPLACE ME
+    organization: rkumarr-PAL-JAN22    #<---- addd REPLACE ME
     space: dev         #<---- REPLACE ME
     skip_cert_check: true
 
