@@ -9,7 +9,7 @@ resources:
 - name: deploy-attendee-service
   type: cf
   source:
-    api: api.system.cumululabs.io        #<---- REPLACE ME
+    api: https://api.system.cumululabs.io        #<---- REPLACE ME
     username: {{cf-user}}
     password: {{cf-password}}
     organization: rkumarr-PAL-JAN22    #<---- REPLACE ME
@@ -23,7 +23,7 @@ jobs:
   - get: attendee-service-source
     trigger: true
   - task: test
-    file: pcf-attendee-service-source/ci/tasks/test.yml
+    file: attendee-service-source/ci/tasks/test.yml
 
 - name: deploy
   public: true
@@ -32,10 +32,10 @@ jobs:
     trigger: true
     passed: [test]
   - task: package
-    file: pcf-attendee-service-source/ci/tasks/package.yml
+    file: attendee-service-source/ci/tasks/package.yml
   - put: deploy-attendee-service
     params:
-      manifest: attendee-service/manifest.yml
+      manifest: attendee-service-source/manifest.yml
       path: package-output/attendee-service.jar
 
 - name: smoke_test
@@ -45,6 +45,6 @@ jobs:
     trigger: true
     passed: [deploy]
   - task: smoke_test
-    file: pcf-attendee-service-source/ci/tasks/smoke-test.yml
+    file: attendee-service-source/ci/tasks/smoke-test.yml
     params:
       ATTENDEE_SERVICE_URL: https://attendee-service-brash-hartebeest.apps.cumuluslabs.io/  #<---- REPLACE ME
